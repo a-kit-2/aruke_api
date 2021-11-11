@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./src/db/mysql_data
+      # db:create時のエラー、docker-compose.ymlファイルのdbコンテナ内vlumesの:より後ろ側(ローカルMysqlの内容である:/var/lib/mysql)を削除してbuildしてみたところでなくなる。ローカル環境にMySQLを構築してからでなければvlumesの後ろに:/var/lib/mysqlをつけてはいけない
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  api:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./src:/api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
