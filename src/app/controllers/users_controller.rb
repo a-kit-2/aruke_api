@@ -24,7 +24,9 @@ class UsersController < ApplicationController
 
   # DELETE /users/:id
   def destroy
-    
+    @user = User.find(params[:id])
+    @user.destroy
+    render json: { destroy: true }
   end
 
   private
