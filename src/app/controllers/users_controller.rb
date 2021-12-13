@@ -14,19 +14,33 @@ class UsersController < ApplicationController
   # POST /users
   def create
     @user = User.new(users_params)
-    @user.save
+    if @user.save
+      render json: { create: true }
+    else
+      render json: { create: false }
+    end
   end
 
   # PATCH/PUT /users/:id
   def update
-    
+    @user = User.find(params[:id])
+    @user.name = users_params[:name]
+    @user.email = users_params[:email]
+    if @user.save
+      render json: { update: true }
+    else
+      render json: { update: false }
+    end
   end
 
   # DELETE /users/:id
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    render json: { destroy: true }
+    if @user.destroy
+      render json: { destroy: true }
+    else
+      render json: { destroy: false }
+    end
   end
 
   private
