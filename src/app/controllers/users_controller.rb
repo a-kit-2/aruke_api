@@ -36,11 +36,21 @@ class UsersController < ApplicationController
   # DELETE /users/:id
   def destroy
     @user = User.find(params[:id])
-    if @user.destroy
-      render json: { destroy: true }
+
+    # 論理削除
+    @user.is_deleted = true
+    if @user.save
+      render json: { logical_delete: true }
     else
-      render json: { destroy: false }
+      render json: { logical_delete: false }
     end
+
+    # 完全に削除
+    # if @user.destroy
+    #   render json: { destroy: true }
+    # else
+    #   render json: { destroy: false }
+    # end
   end
 
   private
