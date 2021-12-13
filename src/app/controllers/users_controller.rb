@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(users_params)
+    @user = User.new(name: users_params[:name], email: users_params[:email], is_deleted: false)
     if @user.save
       render json: { create: true }
     else
