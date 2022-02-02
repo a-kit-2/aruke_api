@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_12_05_051603) do
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_deleted"
   end
 
   add_foreign_key "goals", "users"
