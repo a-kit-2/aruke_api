@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_082703) do
+ActiveRecord::Schema.define(version: 2021_12_05_051603) do
+
+  create_table "goals", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "steps"
+    t.datetime "term"
+    t.integer "penalties"
+    t.boolean "is_achieved"
+    t.boolean "is_deleted"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_goals_on_user_id"
+  end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
@@ -20,4 +32,5 @@ ActiveRecord::Schema.define(version: 2021_12_13_082703) do
     t.boolean "is_deleted"
   end
 
+  add_foreign_key "goals", "users"
 end
