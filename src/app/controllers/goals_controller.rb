@@ -11,12 +11,14 @@ class GoalsController < ApplicationController
         render json: { goals: @goal }
     end
 
-    def new
-        @goal = Goal.new
-    end
-
     def create
-        @goal = Goal.create(steps: goals_params[:step], term: goals_params[:term], penalties: goals_params[:penalties],is_achieved: false,is_deleted: false)
+        @goal = Goal.new(
+            steps: goals_params[:step],
+            term: goals_params[:term],
+            penalties: goals_params[:penalties],
+            is_achieved: false,
+            is_deleted: false
+            )
         if @goal.save
             render json: { create: true }
           else
