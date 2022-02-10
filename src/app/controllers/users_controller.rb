@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(name: users_params[:name], email: users_params[:email], is_deleted: false)
+    @user = User.new(auth0_id: users_params[:auth0_id], stripe_id: users_params[:stripe_id], is_deleted: false)
     if @user.save
       render json: { create: true }
     else
@@ -56,6 +56,6 @@ class UsersController < ApplicationController
   private
 
   def users_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:auth0_id, :stripe_id, :is_deleted)
   end
 end
