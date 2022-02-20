@@ -1,4 +1,6 @@
 class GoalsController < ApplicationController
+    include Secured
+
     #GET /goals
     def index
         @goals = Goal.all
@@ -13,23 +15,24 @@ class GoalsController < ApplicationController
         render json: { goals: @goal }
     end
 
-    #POST /goals/
+    #POST /goals
     def create
-        @user = User.find(1)
-        @goal = @user.goals.create(
-            steps: goals_params[:step],
-            term: goals_params[:term],
+        @date = Date.new(goals_params[:term][0..3].to_i, goals_params[:term][4..5].to_i, goals_params[:term][6..7].to_i)
+        @goal = current_user.goals.create(
+            steps: goals_params[:steps],
+            term: @date,
             penalties: goals_params[:penalties],
             is_achieved: false,
             is_deleted: false
         )
         if @goal.save
             render json: { create: true }
-          else
+        else
             render json: { create: false }
-          end
+        end
     end
 
+    # PATCH/PUT /goals/:id
     def update
         @goal = Goal.find(params[:id])
         @goal.steps = goals_params[:step]
@@ -37,25 +40,26 @@ class GoalsController < ApplicationController
         @goals/penalties = goals_params[:penalties]
         if @goal.save
             render json: { update: true }
-          else
+        else
             render json: { update: false }
-          end
+        end
     end
 
+    # DELETE /goals/:id
     def destroy
         @goal = Goal.find(params[:id])
         @goal.is_deleted = true
         if @goal.save
             render json: { destroy: true }
-          else
+        else
             render json: { destroy: false }
-          end
+        end
     end
 
     private
 
     def goals_params
-        params.require(:goal).permit(:step, :term, :penalties)
+        params.require(:goal).permit(:steps, :term, :penalties)
     end
 
 end
