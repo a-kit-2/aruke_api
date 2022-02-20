@@ -3,7 +3,7 @@ class PrivateController < ActionController::API
   include Secured
 
   def private
-    render json: { message: 'Hello from a private endpoint! You need to be authenticated to see this.', auth_payload: @auth_payload, auth_header: @auth_header }
+    render json: { message: 'Hello from a private endpoint! You need to be authenticated to see this.', current_user: current_user }
   end
 
   def private_scoped
