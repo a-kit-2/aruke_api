@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   get '/api/public', to: 'public#public'
   get '/api/private', to: 'private#private'
   get '/api/private-scoped', to: 'private#private_scoped'
+  
+  # devise_for :users
 end
