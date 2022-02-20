@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_044719) do
     t.datetime "term"
     t.integer "penalties"
     t.boolean "is_achieved"
+    t.boolean "is_deleted"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -27,7 +28,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_044719) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_deleted"
-    t.string "auth0_id"
+    t.string ""
     t.string "stripe_id"
   end
 

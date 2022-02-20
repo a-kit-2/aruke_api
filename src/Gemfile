@@ -31,7 +31,8 @@ group :development, :test do
   
   #コントローラーテスト用に追加
   gem 'rspec-rails', '~> 4.0.1'
-
+  gem 'factory_bot_rails', '~> 4.10.0'
+  gem 'devise'
 end
 
 group :development do
