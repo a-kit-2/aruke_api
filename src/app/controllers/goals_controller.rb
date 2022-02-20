@@ -1,8 +1,10 @@
 class GoalsController < ApplicationController
-    # GET /goals
+    #GET /goals
     def index
         @goals = Goal.all
         render json: { goals: @goals }
+        # @users = User.find(1)
+        # render json: { users: @users }
     end
 
     # GET /goals/:id
@@ -11,14 +13,16 @@ class GoalsController < ApplicationController
         render json: { goals: @goal }
     end
 
+    #POST /goals/
     def create
-        @goal = Goal.new(
+        @user = User.find(1)
+        @goal = @user.goals.create(
             steps: goals_params[:step],
             term: goals_params[:term],
             penalties: goals_params[:penalties],
             is_achieved: false,
             is_deleted: false
-            )
+        )
         if @goal.save
             render json: { create: true }
           else
