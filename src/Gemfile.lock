@@ -189,8 +189,6 @@ DEPENDENCIES
   devise
   factory_bot_rails (~> 4.10.0)
   jwt
-  devise
-  factory_bot_rails (~> 4.10.0)
   listen (~> 3.3)
   mysql2 (~> 0.5)
   puma (~> 5.0)
