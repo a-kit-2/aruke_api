@@ -12,7 +12,7 @@ module Secured
   end
 
   def current_user
-    @user = User.find_by(auth0_id: @auth_payload['azp'])
+    @user = User.find_by(auth0_id: @auth_payload['sub'])
   end
 
   private
