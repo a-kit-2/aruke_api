@@ -2,6 +2,8 @@ version: "3"
 services:
   db:
     image: mysql:8.0
+    ports:
+      - "3306:3306"
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - $PWD/src/db/mysql_data

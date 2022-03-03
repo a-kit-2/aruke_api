@@ -11,6 +11,10 @@ module Secured
     before_action :authenticate_request!
   end
 
+  def current_user
+    @user = User.find_by(auth0_id: @auth_payload['sub'])
+  end
+
   private
 
   def authenticate_request!
