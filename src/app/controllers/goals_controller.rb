@@ -33,9 +33,7 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/:id
   def update
     @goal = Goal.find(params[:id])
-    @goal.steps = goals_params[:step]
-    @goal.term = goals_params[:term]
-    @goals/penalties = goals_params[:penalties]
+    @goal.is_achieved = true
     if @goal.save
       render json: { update: true }
     else
